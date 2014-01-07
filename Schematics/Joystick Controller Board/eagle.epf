@@ -364,7 +364,7 @@ UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/teensy-libs/teensypp.lbr"
 
 [Win_1]
 Type="Control Panel"
-Loc="652 381 1606 933"
+Loc="652 381 1251 780"
 State=2
 Number=0
 
