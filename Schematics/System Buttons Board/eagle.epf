@@ -18,6 +18,8 @@ UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/74xx-little-de.lbr"
 UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/74xx-little-us.lbr"
 UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/74xx-us.lbr"
 UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/751xx.lbr"
+UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/LilyPad-Wearables.lbr"
+UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/RaspberryPi.lbr"
 UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/SparkFun-Aesthetics.lbr"
 UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/SparkFun-AnalogIC.lbr"
 UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/SparkFun-Boards.lbr"
@@ -357,11 +359,12 @@ UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/xilinx-xc9.lbr"
 UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/xilinx-xcv.lbr"
 UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/zetex.lbr"
 UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/zilog.lbr"
-UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/RaspberryPi.lbr"
+UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/teensy-libs/teensy2.lbr"
+UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/teensy-libs/teensypp.lbr"
 
 [Win_1]
 Type="Control Panel"
-Loc="446 309 1399 830"
+Loc="652 381 1606 933"
 State=2
 Number=0
 
