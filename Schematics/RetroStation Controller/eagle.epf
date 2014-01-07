@@ -357,15 +357,13 @@ UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/xilinx-xc9.lbr"
 UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/xilinx-xcv.lbr"
 UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/zetex.lbr"
 UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/zilog.lbr"
-UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/teensy-libs/teensy2.lbr"
-UsedLibrary="C:/Program Files/EAGLE-6.5.0/lbr/teensy-libs/teensypp.lbr"
 
 [Win_1]
 Type="Control Panel"
-Loc="1152 433 1751 832"
+Loc="412 231 1011 630"
 State=2
 Number=0
 
 [Desktop]
-Screen="3200 1200"
+Screen="2806 900"
 Window="Win_1"
