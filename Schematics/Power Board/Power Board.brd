@@ -111,6 +111,7 @@
 <wire x1="0" y1="52.06" x2="0" y2="0" width="0" layer="20"/>
 <text x="22.86" y="20.32" size="1.778" layer="25">+</text>
 <text x="24.13" y="29.21" size="1.778" layer="25" rot="R90">-</text>
+<text x="21.59" y="1.27" size="1.778" layer="25" rot="R90">Power Board V1</text>
 </plain>
 <libraries>
 <library name="SparkFun-Electromechanical">

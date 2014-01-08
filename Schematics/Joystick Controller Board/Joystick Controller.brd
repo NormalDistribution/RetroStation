@@ -109,6 +109,8 @@
 <wire x1="41.58" y1="0" x2="41.58" y2="80" width="0" layer="20"/>
 <wire x1="41.58" y1="80" x2="0" y2="80" width="0" layer="20"/>
 <wire x1="0" y1="80" x2="0" y2="0" width="0" layer="20"/>
+<text x="11.43" y="73.66" size="1.778" layer="25">Joystick Controller 
+Board V1</text>
 </plain>
 <libraries>
 <library name="SparkFun-Electromechanical">
@@ -687,4 +689,10 @@ design rules under a new name.</description>
 </signals>
 </board>
 </drawing>
+<compatibility>
+<note version="6.3" minversion="6.2.2" severity="warning">
+Since Version 6.2.2 text objects can contain more than one line,
+which will not be processed correctly with this version.
+</note>
+</compatibility>
 </eagle>

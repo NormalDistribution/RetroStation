@@ -60,6 +60,7 @@
 <wire x1="70.79" y1="0" x2="70.79" y2="35.55" width="0" layer="20"/>
 <wire x1="70.79" y1="35.55" x2="0" y2="35.55" width="0" layer="20"/>
 <wire x1="0" y1="35.55" x2="0" y2="0" width="0" layer="20"/>
+<text x="21.59" y="33.02" size="1.778" layer="25">System Buttons Board V1</text>
 </plain>
 <libraries>
 <library name="con-lstb">

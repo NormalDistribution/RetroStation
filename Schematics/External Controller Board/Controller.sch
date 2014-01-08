@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="no" active="no"/>
@@ -590,6 +590,15 @@ LETTER landscape</description>
 <sheets>
 <sheet>
 <plain>
+<text x="58.42" y="137.16" size="1.778" layer="96">Start</text>
+<text x="58.42" y="127" size="1.778" layer="96">Select</text>
+<text x="58.42" y="38.1" size="1.778" layer="96">Menu</text>
+<text x="60.96" y="114.3" size="1.778" layer="96">A</text>
+<text x="60.96" y="101.6" size="1.778" layer="96">B</text>
+<text x="60.96" y="88.9" size="1.778" layer="96">C</text>
+<text x="60.96" y="76.2" size="1.778" layer="96">X</text>
+<text x="60.96" y="63.5" size="1.778" layer="96">Y</text>
+<text x="60.96" y="50.8" size="1.778" layer="96">Z</text>
 </plain>
 <instances>
 <instance part="U1" gate="G$1" x="198.12" y="109.22"/>
