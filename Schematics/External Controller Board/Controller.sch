@@ -801,6 +801,22 @@ LETTER landscape</description>
 </nets>
 </sheet>
 </sheets>
+<errors>
+<approved hash="204,1,175.26,111.76,U1,VCC2,,,,"/>
+<approved hash="204,1,175.26,109.22,U1,GND2,,,,"/>
+<approved hash="202,1,175.26,106.68,U1,RST,,,,"/>
+<approved hash="202,1,175.26,68.58,U1,AREF,,,,"/>
+<approved hash="113,1,68.58,136.771,S1,,,,,"/>
+<approved hash="113,1,68.58,124.071,S2,,,,,"/>
+<approved hash="113,1,68.58,111.371,S3,,,,,"/>
+<approved hash="113,1,68.58,98.6705,S4,,,,,"/>
+<approved hash="113,1,68.58,85.9705,S5,,,,,"/>
+<approved hash="113,1,68.58,73.2705,S6,,,,,"/>
+<approved hash="113,1,68.58,60.5705,S7,,,,,"/>
+<approved hash="113,1,68.58,47.8705,S8,,,,,"/>
+<approved hash="113,1,124.356,92.606,FRAME1,,,,,"/>
+<approved hash="113,1,68.58,35.1705,S9,,,,,"/>
+</errors>
 </schematic>
 </drawing>
 </eagle>
