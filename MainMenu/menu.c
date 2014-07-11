@@ -1,10 +1,57 @@
+/*
+(c) 2014 Normal Distribution
+RetroStation Boot Menu
+
+Written by Matt Wise for Normal Distribution, distributed under GNU GENERAL PUBLIC LICENSE V2.
+
+Copyright (c) 2014 Normal Distribution.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+- Redistributions of source code must retain the above copyright notice,
+this list of conditions and the following disclaimer.
+- Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+*/
+
 #include <newt.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h> 
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h> /* for strncpy */
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/ioctl.h>
+#include <netinet/in.h>
+#include <net/if.h>
+#include <arpa/inet.h>
 
 void drawMainForm();
 void drawSettingsForm();
+char* getIp();
+void messageBox(unsigned int uiW, unsigned int uiH, const char* pMessage);
+
+char* cTitle = "RetroStation v0.1";
+char* cCopyright = "(c) 2014 Normal Distribution";
+char* cPrimaryHelpLine = "Use <UP> & <DOWN> to move selection. Press <START> to make a selection";
+
 
 int main(void) 
 {
@@ -25,11 +72,12 @@ void drawMainForm()
 
 	newtCls();
 
-	newtDrawRootText(0, 0, "RetroStation v0.1");
-	newtDrawRootText(0, 1, "(c) 2014 Normal Distribution");
+	newtDrawRootText(0, 0, cTitle);
+	newtDrawRootText(0, 1, cCopyright);
+	newtDrawRootText(0, 2, getIp());
 	newtCenteredWindow(40, 13, "Main Menu");
 
-	newtPushHelpLine("Use <UP> & <DOWN> to move selection. Press <START> to make a selection");
+	newtPushHelpLine(cPrimaryHelpLine);
 
 	btnStart = newtButton(10, 1, "Start RetroStation");
 	btnSettings = newtButton(10, 5, "Settings");
@@ -51,7 +99,8 @@ void drawMainForm()
 	}
 	else if(selectedButton == btnShutdown)
 	{
-		system("shutdown -h now");
+		//Exit right now. Don't shutdown
+		//system("shutdown -h now");
 	}
 	
 	newtFormDestroy(frmMain);
@@ -73,11 +122,12 @@ void drawSettingsForm()
 
 	newtCls();
 
-	newtDrawRootText(0, 0, "RetroStation v0.1");
-	newtDrawRootText(0, 1, "(c) 2014 QuantumPhysGuy");
+	newtDrawRootText(0, 0, cTitle);
+	newtDrawRootText(0, 1, cCopyright);
+	newtDrawRootText(0, 2, getIp());
 	newtCenteredWindow(40, 13, "Settings");
 
-	newtPushHelpLine("Use <UP> & <DOWN> to move selection. Press <SELECT> to make a selection");
+	newtPushHelpLine(cPrimaryHelpLine);
 
 	btnWiFiSettings = newtButton(10, 1, "WiFi Settings");
 	btnImportROMs = newtButton(10, 5, "Import ROMs");
@@ -90,8 +140,62 @@ void drawSettingsForm()
 	if (selectedButton == btnBack)
 	{
 		drawMainForm();
-	}	
+	}
+	else if (selectedButton == btnWiFiSettings)
+	{
+		messageBox(40, 13, "WiFi Settings not implemented.");
+		drawSettingsForm();
+	}
+	else if (selectedButton == btnImportROMs)
+	{
+		messageBox(40, 13, "Import ROMs not implemented.");
+		drawSettingsForm();			
+	}
 	
 	newtFormDestroy(frmSettings);
 	newtFinished();
+}
+
+void messageBox(unsigned int uiW, unsigned int uiH, const char* pMessage) 
+{
+	newtComponent form;
+	newtComponent label;
+	newtComponent button;
+	 
+	newtCenteredWindow(uiW, uiH, "System Message");
+	newtPopHelpLine();
+	newtPushHelpLine("<Press <START> button to return>");
+	 
+	label = newtLabel((uiW-strlen(pMessage))/2, uiH/4, pMessage);
+	button = newtButton((uiW-6)/2, 2*uiH/3, "OK");
+	form = newtForm(NULL, NULL, 0);
+	newtFormAddComponents(form, label, button, NULL);
+	newtRunForm(form);
+	 
+	newtFormDestroy(form); 
+}
+
+char* getIp()
+{
+	int fd;
+	struct ifreq ifr;
+	char* cIP;
+
+	fd = socket(AF_INET, SOCK_DGRAM, 0);
+
+	/* Get an IPv4 IP address */
+	ifr.ifr_addr.sa_family = AF_INET;
+
+	/* Get IP address attached to "eth0" */
+	/* This will have to be updated to also look "wlan0" */
+	strncpy(ifr.ifr_name, "eth0", IFNAMSIZ-1);
+
+	ioctl(fd, SIOCGIFADDR, &ifr);
+
+	close(fd);
+
+	/* store result */
+	cIP = inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr);
+
+	return cIP;
 }
