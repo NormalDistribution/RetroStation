@@ -32,7 +32,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <newt.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h> 
+#include <stdbool.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h> /* for strncpy */
@@ -45,7 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 void drawMainForm();
 void drawSettingsForm();
-char* getIp();
+char* getIp(char* cInterface);
 void messageBox(unsigned int uiW, unsigned int uiH, const char* pMessage);
 
 char* cTitle = "RetroStation v0.1";
@@ -53,7 +53,7 @@ char* cCopyright = "(c) 2014 Normal Distribution";
 char* cPrimaryHelpLine = "Use <UP> & <DOWN> to move selection. Press <START> to make a selection";
 
 
-int main(void) 
+int main(void)
 {
 	newtInit();
 	drawMainForm();
@@ -74,12 +74,12 @@ void drawMainForm()
 
 	newtDrawRootText(0, 0, cTitle);
 	newtDrawRootText(0, 1, cCopyright);
-	newtDrawRootText(0, 2, getIp());
+	newtDrawRootText(0, 2, getIp("wlan0"));
 	newtCenteredWindow(40, 13, "Main Menu");
 
 	newtPushHelpLine(cPrimaryHelpLine);
 
-	btnStart = newtButton(10, 1, "Start RetroStation");
+	btnStart = newtButton(10, 1, "Start Emulation Station");
 	btnSettings = newtButton(10, 5, "Settings");
 	btnShutdown = newtButton(10, 9, "Shutdown");
 
@@ -87,10 +87,10 @@ void drawMainForm()
 	newtFormAddComponents(frmMain, btnStart, btnSettings, btnShutdown, NULL);
 
 	selectedButton = newtRunForm(frmMain);
-	
+
 	if (selectedButton == btnStart)
 	{
-		system("aptitude");
+		system("emulationstation");
 		appStarted = true;
 	}
 	else if (selectedButton == btnSettings)
@@ -102,7 +102,7 @@ void drawMainForm()
 		//Exit right now. Don't shutdown
 		//system("shutdown -h now");
 	}
-	
+
 	newtFormDestroy(frmMain);
 	newtFinished();
 
@@ -124,7 +124,7 @@ void drawSettingsForm()
 
 	newtDrawRootText(0, 0, cTitle);
 	newtDrawRootText(0, 1, cCopyright);
-	newtDrawRootText(0, 2, getIp());
+	newtDrawRootText(0, 2, getIp("wlan0"));
 	newtCenteredWindow(40, 13, "Settings");
 
 	newtPushHelpLine(cPrimaryHelpLine);
@@ -149,9 +149,9 @@ void drawSettingsForm()
 	else if (selectedButton == btnImportROMs)
 	{
 		messageBox(40, 13, "Import ROMs not implemented.");
-		drawSettingsForm();			
+		drawSettingsForm();
 	}
-	
+
 	newtFormDestroy(frmSettings);
 	newtFinished();
 }
@@ -161,21 +161,21 @@ void messageBox(unsigned int uiW, unsigned int uiH, const char* pMessage)
 	newtComponent form;
 	newtComponent label;
 	newtComponent button;
-	 
+
 	newtCenteredWindow(uiW, uiH, "System Message");
 	newtPopHelpLine();
 	newtPushHelpLine("<Press <START> button to return>");
-	 
+
 	label = newtLabel((uiW-strlen(pMessage))/2, uiH/4, pMessage);
 	button = newtButton((uiW-6)/2, 2*uiH/3, "OK");
 	form = newtForm(NULL, NULL, 0);
 	newtFormAddComponents(form, label, button, NULL);
 	newtRunForm(form);
-	 
-	newtFormDestroy(form); 
+
+	newtFormDestroy(form);
 }
 
-char* getIp()
+char* getIp(char* cInterface)
 {
 	int fd;
 	struct ifreq ifr;
@@ -186,9 +186,8 @@ char* getIp()
 	/* Get an IPv4 IP address */
 	ifr.ifr_addr.sa_family = AF_INET;
 
-	/* Get IP address attached to "eth0" */
-	/* This will have to be updated to also look "wlan0" */
-	strncpy(ifr.ifr_name, "eth0", IFNAMSIZ-1);
+	/* Get IP address attached to the passed interface */
+	strncpy(ifr.ifr_name, cInterface, IFNAMSIZ-1);
 
 	ioctl(fd, SIOCGIFADDR, &ifr);
 
