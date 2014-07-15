@@ -52,7 +52,6 @@ char* cTitle = "RetroStation v0.1";
 char* cCopyright = "(c) 2014 Normal Distribution";
 char* cPrimaryHelpLine = "Use <UP> & <DOWN> to move selection. Press <START> to make a selection";
 
-
 int main(void)
 {
 	newtInit();
@@ -90,8 +89,17 @@ void drawMainForm()
 
 	if (selectedButton == btnStart)
 	{
-		system("emulationstation");
-		appStarted = true;
+		int iReturn = system("emulationstation");
+
+		if (iReturn == 1)
+		{
+			appStarted = true;
+		}
+		else
+		{
+			messageBox(40, 13, "Unable to launch Emulation Station!!!");
+			main();
+		}
 	}
 	else if (selectedButton == btnSettings)
 	{
@@ -116,7 +124,7 @@ void drawSettingsForm()
 {
 	newtComponent frmSettings;
 	newtComponent btnImportROMs;
-	newtComponent btnWiFiSettings;
+	newtComponent btnNetworkSettings;
 	newtComponent btnBack;
 	newtComponent selectedButton;
 
@@ -129,11 +137,11 @@ void drawSettingsForm()
 
 	newtPushHelpLine(cPrimaryHelpLine);
 
-	btnWiFiSettings = newtButton(10, 1, "WiFi Settings");
+	btnNetworkSettings = newtButton(10, 1, "Network Settings");
 	btnImportROMs = newtButton(10, 5, "Import ROMs");
 	btnBack = newtButton(10, 9, "Back");
 	frmSettings = newtForm(NULL, NULL, 0);
-	newtFormAddComponents(frmSettings, btnWiFiSettings, btnImportROMs, btnBack, NULL);
+	newtFormAddComponents(frmSettings, btnNetworkSettings, btnImportROMs, btnBack, NULL);
 
 	selectedButton = newtRunForm(frmSettings);
 
@@ -141,9 +149,9 @@ void drawSettingsForm()
 	{
 		drawMainForm();
 	}
-	else if (selectedButton == btnWiFiSettings)
+	else if (selectedButton == btnNetworkSettings)
 	{
-		messageBox(40, 13, "WiFi Settings not implemented.");
+		messageBox(40, 13, "Network Settings not implemented.");
 		drawSettingsForm();
 	}
 	else if (selectedButton == btnImportROMs)
